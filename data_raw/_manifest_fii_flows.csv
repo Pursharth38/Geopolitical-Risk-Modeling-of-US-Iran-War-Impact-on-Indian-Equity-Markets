@@ -1,0 +1,3 @@
+dataset,frequency,rows,coverage,status,note,source,fetched_at
+nsdl_fpi_monthly,monthly,7,January–July 2026,ok,Headline monthly net investment.,NSDL_FPI_yearwise,2026-08-01T14:43:41
+nsdl_fpi_daily,daily,139,2026-01-01 -> 2026-07-31,ok,Per-date NSDL Archive; equity + total net. Trading dates aligned to Nifty series.,NSDL_FPI_archive,2026-08-01T14:43:41

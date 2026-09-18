@@ -1,0 +1,22 @@
+# Local DB credentials — never commit
+db_local.json
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Jupyter/scratch
+*.log
+
+# Agent tooling / working notes (local only)
+.claude/
+.mcp.json
+
+# Power BI local state — machine-bound credential bindings & binary model cache
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Windows / OneDrive cruft
+desktop.ini
+Thumbs.db

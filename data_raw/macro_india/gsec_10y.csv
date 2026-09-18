@@ -1,0 +1,4 @@
+date,yield_pct,note,provenance,source,source_url,compiled_at
+2026-05-31,7.03,"CCIL benchmark, May month-end",manual_compiled,CCIL / TradingEconomics,https://tradingeconomics.com/india/government-bond-yield,2026-07-21T03:01:46
+2026-06-30,7.0,"CCIL benchmark, Jun",manual_compiled,CCIL / TradingEconomics,https://tradingeconomics.com/india/government-bond-yield,2026-07-21T03:01:46
+2026-07-20,6.78,"TradingEconomics, intraday",manual_compiled,CCIL / TradingEconomics,https://tradingeconomics.com/india/government-bond-yield,2026-07-21T03:01:46

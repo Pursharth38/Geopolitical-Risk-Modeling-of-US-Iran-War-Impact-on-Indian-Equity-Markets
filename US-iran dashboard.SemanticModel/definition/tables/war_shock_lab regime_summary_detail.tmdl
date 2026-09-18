@@ -1,0 +1,116 @@
+table 'war_shock_lab regime_summary_detail'
+	lineageTag: 1f6d589a-51e9-44ed-aff4-d6c3e99008af
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 22b978e4-cf32-43e5-be26-b055d07adcf1
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_name
+		dataType: string
+		isHidden
+		lineageTag: d59f33bd-722d-40cd-913f-30a31c5c91f9
+		summarizeBy: none
+		sourceColumn: phase_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column var_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a116174-ed1a-41e8-9935-f4e7564ff785
+		summarizeBy: none
+		sourceColumn: var_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column variable
+		dataType: string
+		lineageTag: ba6e83c7-b9dc-41a6-a833-31bd274f55d7
+		summarizeBy: none
+		sourceColumn: variable
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: string
+		lineageTag: 61c96877-20e5-45ed-825f-137e9923be90
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_days
+		dataType: int64
+		formatString: 0
+		lineageTag: aa92655d-e771-4e78-b490-893b861d653b
+		summarizeBy: sum
+		sourceColumn: n_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column n_obs
+		dataType: int64
+		formatString: 0
+		lineageTag: 56775591-fb68-40cc-be9a-43b66b05e919
+		summarizeBy: sum
+		sourceColumn: n_obs
+
+		annotation SummarizationSetBy = Automatic
+
+	column mean_val
+		dataType: double
+		lineageTag: 292395ad-0991-4ac6-9378-e61ba5afa519
+		summarizeBy: none
+		sourceColumn: mean_val
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sd_val
+		dataType: double
+		lineageTag: ae80bf3c-b9c3-4674-b41c-d9387a74089f
+		summarizeBy: none
+		sourceColumn: sd_val
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column min_val
+		dataType: double
+		lineageTag: 0c3eb40c-b524-4929-9f44-aaf40eef7492
+		summarizeBy: none
+		sourceColumn: min_val
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column max_val
+		dataType: double
+		lineageTag: f20d7f23-a774-449c-8b9e-65303317324d
+		summarizeBy: none
+		sourceColumn: max_val
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab regime_summary_detail' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_regime_summary_detail = Source{[Schema="war_shock_lab",Item="regime_summary_detail"]}[Data]
+				in
+				    war_shock_lab_regime_summary_detail
+
+	annotation PBI_ResultType = Table
+

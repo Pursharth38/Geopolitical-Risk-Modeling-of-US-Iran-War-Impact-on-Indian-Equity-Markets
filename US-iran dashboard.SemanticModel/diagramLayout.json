@@ -1,0 +1,308 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 2502,
+        "y": 444
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 912.06654886015735,
+            "y": 359.34017147531722
+          },
+          "nodeIndex": "war_shock_lab daily_panel",
+          "nodeLineageTag": "a07669f7-2a04-40b7-bd85-68ce42c8626f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1146.0665488601574,
+            "y": 489.68900910816342
+          },
+          "nodeIndex": "war_shock_lab fii_flows",
+          "nodeLineageTag": "cb501835-0c42-468e-af06-82e97fde7bb5",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1430.0665488601574,
+            "y": 513.68900910816342
+          },
+          "nodeIndex": "war_shock_lab fx_rates",
+          "nodeLineageTag": "4b9d98ae-41ec-405b-9bb8-5a285dcca156",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1714.0665488601574,
+            "y": 465.68900910816342
+          },
+          "nodeIndex": "war_shock_lab hormuz_status",
+          "nodeLineageTag": "b7782ce3-90ca-48f7-b94e-060cadedf73b",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1998.0665488601574,
+            "y": 489.68900910816342
+          },
+          "nodeIndex": "war_shock_lab index_levels",
+          "nodeLineageTag": "29ae6ddd-e7a4-4333-b17b-cac4347b362f",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 303.68194002340033
+          },
+          "nodeIndex": "war_shock_lab india_stress_index",
+          "nodeLineageTag": "0340f7a4-ab79-465f-a526-ad00a16a475a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 791.26081687228793,
+            "y": 5.6893633034719642
+          },
+          "nodeIndex": "war_shock_lab india_stress_panel",
+          "nodeLineageTag": "bc38b436-66c6-4bba-bc34-e03632e003f0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2282.0665488601571,
+            "y": 477.68900910816342
+          },
+          "nodeIndex": "war_shock_lab macro_india",
+          "nodeLineageTag": "6225f526-99f7-47ad-b1c4-f3ff8049019c",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2566.0665488601571,
+            "y": 489.68900910816342
+          },
+          "nodeIndex": "war_shock_lab oil_prices",
+          "nodeLineageTag": "7604d709-d65c-4367-896e-71f59e870d77",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2850.0665488601571,
+            "y": 489.68900910816342
+          },
+          "nodeIndex": "war_shock_lab oil_supply_shocks",
+          "nodeLineageTag": "c34e5f1b-a6ab-49e8-bd4f-4c9c2baedef5",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 490.55751269200368,
+            "y": 929.37801821632684
+          },
+          "nodeIndex": "war_shock_lab phases",
+          "nodeLineageTag": "4637cad0-0cff-4854-8e8b-d3b32bae1c02",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 436.672702899927,
+            "y": 569.95257086905281
+          },
+          "nodeIndex": "war_shock_lab regime_dynamics",
+          "nodeLineageTag": "ab56acdb-b30f-4866-b8bf-fcce14bd5762",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 504.96082480881,
+            "y": 216.35184022832766
+          },
+          "nodeIndex": "war_shock_lab regime_summary",
+          "nodeLineageTag": "6eb57b94-528f-47fe-848b-304a34096f21",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 217.99207437513348,
+            "y": -50
+          },
+          "nodeIndex": "war_shock_lab regime_summary_detail",
+          "nodeLineageTag": "1f6d589a-51e9-44ed-aff4-d6c3e99008af",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3134.0665488601571,
+            "y": 477.68900910816342
+          },
+          "nodeIndex": "war_shock_lab stock_prices",
+          "nodeLineageTag": "d6c6152e-e81d-47d0-b1f7-ca57495718dc",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3418.0665488601571,
+            "y": 427.68900910816342
+          },
+          "nodeIndex": "war_shock_lab stress_baseline",
+          "nodeLineageTag": "42b56167-1932-4666-be3b-3797cbe71e43",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 777.67469957250546,
+            "y": 712.978551460044
+          },
+          "nodeIndex": "war_shock_lab stress_components",
+          "nodeLineageTag": "9946bcc0-f929-494e-89f0-eadaac69da41",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3702.0665488601571,
+            "y": 465.68900910816342
+          },
+          "nodeIndex": "war_shock_lab war_events",
+          "nodeLineageTag": "ed3daa0f-76fc-4cac-8cd4-b4aa2509ccef",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4270.0665488601571,
+            "y": 377.68900910816342
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "979bd246-0a6c-4ef6-a75f-1e5deb2f8289",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4504.0665488601571,
+            "y": 465.68900910816342
+          },
+          "nodeIndex": "Hormuz Geography",
+          "nodeLineageTag": "e8e2f9ad-28d5-4918-a047-070f03aadaba",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4788.0665488601571,
+            "y": 477.68900910816342
+          },
+          "nodeIndex": "Hormuz Status",
+          "nodeLineageTag": "0980d086-f6e3-4c2e-82f2-1d4123c79784",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 5356.0665488601571,
+            "y": 427.68900910816342
+          },
+          "nodeIndex": "Scenario Grid",
+          "nodeLineageTag": "be5de45d-4a9b-47c9-8d61-319b5f5579f3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,111 @@
+/// Pre-computed scenario surface for the Scenario Lab. Same-day Nifty response to a one-day Brent shock and rupee move, from the OLS in notebooks/03_oil_flows_returns_regression.ipynb (n=115 trading days, R2=0.176): const 0.0003, brent_return -0.0774 (p=0.001), usd_inr_change -0.4228 (p=0.018). Band is 1.96 x the combined coefficient standard errors (0.0227, 0.1766). NOT keyed on Hormuz lost-bpd: that relationship tested null across six specifications, and lost-bpd is an analyst intensity estimate rather than a measurement. FII flow and CAD are deliberately absent - the FII coefficient was insignificant (p=0.42) and no CAD model exists.
+table 'Scenario Grid'
+	lineageTag: be5de45d-4a9b-47c9-8d61-319b5f5579f3
+
+	/// Projected same-day Nifty return for the selected Brent shock and rupee move. Explanatory OLS estimate, not a forecast.
+	measure 'Scenario Nifty Return' = AVERAGE ( 'Scenario Grid'[Projected Nifty Return] )
+		formatString: 0.00%
+		displayFolder: Scenario
+		lineageTag: b6869498-939d-44cc-a986-d4e12000199e
+
+	/// Lower bound of the 95% coefficient-uncertainty band.
+	measure 'Scenario Low' = AVERAGE ( 'Scenario Grid'[Projected Low] )
+		formatString: 0.00%
+		displayFolder: Scenario
+		lineageTag: 40e38aca-6613-45c1-9a29-3e30c285b224
+
+	/// Upper bound of the 95% coefficient-uncertainty band.
+	measure 'Scenario High' = AVERAGE ( 'Scenario Grid'[Projected High] )
+		formatString: 0.00%
+		displayFolder: Scenario
+		lineageTag: b8ace38c-b86c-4816-a06b-995cfe9e5926
+
+	/// Brent price implied by the selected shock, applied to the most recent close in the dataset.
+	measure 'Scenario Brent Price' =
+			VAR _shock = SELECTEDVALUE ( 'Scenario Grid'[Brent Shock], 0 )
+			VAR _lastDate = CALCULATE ( MAX ( 'war_shock_lab oil_prices'[date] ), REMOVEFILTERS () )
+			VAR _base = CALCULATE ( AVERAGE ( 'war_shock_lab oil_prices'[brent_close] ), REMOVEFILTERS (), 'war_shock_lab oil_prices'[date] = _lastDate )
+			RETURN
+			    _base * ( 1 + _shock )
+		formatString: $#,##0.00
+		displayFolder: Scenario
+		lineageTag: 7cbcd58c-6ac0-441b-abfd-55abad85b18e
+
+	/// Projected Nifty move in index points, applying the projected return to the most recent Nifty close.
+	measure 'Scenario Nifty Points' =
+			VAR _lastDate = CALCULATE ( MAX ( 'war_shock_lab daily_panel'[date] ), REMOVEFILTERS () )
+			VAR _base = CALCULATE ( AVERAGE ( 'war_shock_lab daily_panel'[nifty_level] ), REMOVEFILTERS (), 'war_shock_lab daily_panel'[date] = _lastDate )
+			RETURN
+			    _base * [Scenario Nifty Return]
+		formatString: #,##0
+		displayFolder: Scenario
+		lineageTag: 8b798567-05c8-4d5a-af44-a6af64fc1376
+
+	/// One-day Brent price shock. Slider input for the scenario lab.
+	column 'Brent Shock'
+		formatString: 0.0%
+		lineageTag: ee098bc1-4104-45c6-b40d-ad544ef19501
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Brent Shock]
+
+	/// One-day USD/INR move. Positive means the rupee weakens.
+	column 'Rupee Move'
+		formatString: 0.0%
+		lineageTag: 3ca214a8-2a1a-47cd-abd0-5362252c5ae5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Rupee Move]
+
+	column 'Projected Nifty Return'
+		isHidden
+		formatString: 0.00%
+		lineageTag: 427c1ee7-cfd2-412b-a269-d937e1ce56be
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Projected Nifty Return]
+
+	column 'Projected Low'
+		isHidden
+		formatString: 0.00%
+		lineageTag: 7c91aaf2-844f-4c55-90d0-9bdff90e6dc3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Projected Low]
+
+	column 'Projected High'
+		isHidden
+		formatString: 0.00%
+		lineageTag: 28a1b244-c9e3-4cec-b3d7-98366834d836
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Projected High]
+
+	partition 'Scenario Grid' = calculated
+		mode: import
+		source =
+				VAR _b =
+				    SELECTCOLUMNS ( GENERATESERIES ( -8, 8, 1 ), "Brent Shock", ROUND ( [Value] * 0.025, 4 ) )
+				VAR _i =
+				    SELECTCOLUMNS ( GENERATESERIES ( -4, 4, 1 ), "Rupee Move", ROUND ( [Value] * 0.005, 4 ) )
+				VAR _g =
+				    CROSSJOIN ( _b, _i )
+				RETURN
+				    ADDCOLUMNS (
+				        _g,
+				        "Projected Nifty Return",
+				            ROUND ( 0.0003 + ( -0.0774 ) * [Brent Shock] + ( -0.4228 ) * [Rupee Move], 6 ),
+				        "Projected Low",
+				            ROUND (
+				                ( 0.0003 + ( -0.0774 ) * [Brent Shock] + ( -0.4228 ) * [Rupee Move] )
+				                    - 1.96 * SQRT ( ( 0.0227 * [Brent Shock] ) ^ 2 + ( 0.1766 * [Rupee Move] ) ^ 2 ),
+				                6
+				            ),
+				        "Projected High",
+				            ROUND (
+				                ( 0.0003 + ( -0.0774 ) * [Brent Shock] + ( -0.4228 ) * [Rupee Move] )
+				                    + 1.96 * SQRT ( ( 0.0227 * [Brent Shock] ) ^ 2 + ( 0.1766 * [Rupee Move] ) ^ 2 ),
+				                6
+				            )
+				    )
+

@@ -1,0 +1,19 @@
+category,ticker,label,file,rows,first_date,last_date,weekday_gaps,status,note,fetched_at
+oil,BZ=F,Brent Crude front-month,data_raw\oil\brent_daily.csv,145,2026-01-02,2026-07-31,6,ok,,2026-08-01T14:43:24
+oil,CL=F,WTI Crude front-month,data_raw\oil\wti_daily.csv,145,2026-01-02,2026-07-31,6,ok,,2026-08-01T14:43:24
+fx,INR=X,USD/INR spot,data_raw\fx\usd_inr_daily.csv,152,2026-01-02,2026-08-01,0,ok,,2026-08-01T14:43:25
+indices,^NSEI,Nifty 50,data_raw\indices\nifty50_daily.csv,142,2026-01-01,2026-07-31,10,ok,,2026-08-01T14:43:25
+indices,^BSESN,BSE Sensex,data_raw\indices\sensex_daily.csv,142,2026-01-01,2026-07-31,10,ok,,2026-08-01T14:43:26
+indices,^NSEBANK,Nifty Bank,data_raw\indices\nifty_bank_daily.csv,142,2026-01-01,2026-07-31,10,ok,,2026-08-01T14:43:26
+indices,^CNXENERGY,Nifty Energy,data_raw\indices\nifty_energy_daily.csv,132,2026-01-02,2026-07-31,19,ok,,2026-08-01T14:43:26
+indices,^CNXAUTO,Nifty Auto,data_raw\indices\nifty_auto_daily.csv,132,2026-01-02,2026-07-31,19,ok,,2026-08-01T14:43:27
+indices,^CNXIT,Nifty IT,data_raw\indices\nifty_it_daily.csv,142,2026-01-01,2026-07-31,10,ok,,2026-08-01T14:43:27
+indices,^CNXPHARMA,Nifty Pharma,data_raw\indices\nifty_pharma_daily.csv,141,2026-01-02,2026-07-31,10,ok,,2026-08-01T14:43:27
+indices,^CNXMETAL,Nifty Metal,data_raw\indices\nifty_metal_daily.csv,132,2026-01-02,2026-07-31,19,ok,,2026-08-01T14:43:28
+stocks,IOC.NS,Indian Oil Corp (OMC),data_raw\stocks\ioc_daily.csv,146,2026-01-01,2026-07-31,6,ok,,2026-08-01T14:43:28
+stocks,BPCL.NS,Bharat Petroleum (OMC),data_raw\stocks\bpcl_daily.csv,146,2026-01-01,2026-07-31,6,ok,,2026-08-01T14:43:28
+stocks,HINDPETRO.NS,Hindustan Petroleum (OMC),data_raw\stocks\hpcl_daily.csv,146,2026-01-01,2026-07-31,6,ok,,2026-08-01T14:43:29
+stocks,HAL.NS,Hindustan Aeronautics,data_raw\stocks\hal_daily.csv,146,2026-01-01,2026-07-31,6,ok,,2026-08-01T14:43:29
+stocks,BEL.NS,Bharat Electronics,data_raw\stocks\bel_daily.csv,146,2026-01-01,2026-07-31,6,ok,,2026-08-01T14:43:30
+stocks,INDIGO.NS,InterGlobe / IndiGo,data_raw\stocks\indigo_daily.csv,145,2026-01-01,2026-07-31,7,ok,,2026-08-01T14:43:30
+stocks,SPICEJET.BO,SpiceJet (BSE listing),data_raw\stocks\spicejet_daily.csv,144,2026-01-01,2026-07-31,8,ok,,2026-08-01T14:43:30

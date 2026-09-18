@@ -1,0 +1,80 @@
+table 'war_shock_lab war_events'
+	lineageTag: ed3daa0f-76fc-4cac-8cd4-b4aa2509ccef
+
+	/// Number of catalogued war events in context.
+	measure 'Event Count' = COUNTROWS ( 'war_shock_lab war_events' )
+		formatString: #,##0
+		displayFolder: Events
+		lineageTag: 91ed9fce-0657-4742-aafe-c44aa1d50b72
+
+	/// Highest event severity score in context. Use for sizing or colouring event markers on a timeline.
+	measure 'Max Event Severity' = MAX ( 'war_shock_lab war_events'[severity_score] )
+		formatString: 0
+		displayFolder: Events
+		lineageTag: 527d68f4-da04-4ae7-9cce-1b8f729af57a
+
+	column event_id
+		dataType: string
+		lineageTag: d9513539-af7a-4cc9-a7dd-35cc0f8b25be
+		summarizeBy: none
+		sourceColumn: event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 5d708241-2a43-49ae-977d-c021a2e15c95
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column type
+		dataType: string
+		lineageTag: 689ba2c4-ce84-4a9e-9544-5d91b2b96f85
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: c548a20b-8928-45e0-a0cb-6f14495d47ec
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity_score
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 27aef57e-723f-4bec-aa54-bf07fd1fa50e
+		summarizeBy: none
+		sourceColumn: severity_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_url
+		dataType: string
+		lineageTag: 295f8a6a-7753-46d5-9f80-dd9ce0dccb91
+		summarizeBy: none
+		sourceColumn: source_url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'war_shock_lab war_events' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_war_events = Source{[Schema="war_shock_lab",Item="war_events"]}[Data]
+				in
+				    war_shock_lab_war_events
+
+	annotation PBI_ResultType = Table
+

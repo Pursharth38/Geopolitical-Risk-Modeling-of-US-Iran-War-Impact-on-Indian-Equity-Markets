@@ -1,0 +1,123 @@
+/// Conformed date dimension covering calendar year 2026. Single shared calendar for every dated fact table; enables cross-table time intelligence.
+table Date
+	lineageTag: 979bd246-0a6c-4ef6-a75f-1e5deb2f8289
+	dataCategory: Time
+
+	/// Calendar date. Primary key of the conformed date dimension.
+	column Date
+		isUnique
+		formatString: dd mmm yyyy
+		lineageTag: 1ff8ec5d-60bc-4536-a16b-94036bcee1f6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+	column Year
+		formatString: 0
+		lineageTag: f24672a9-d3e6-42ec-b5fa-c6a333d7fcd2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Number'
+		isHidden
+		lineageTag: bfd31857-cc4c-48a9-8e37-cfce5e55dfc2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Quarter Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 1fad6b0c-09fc-4259-9a66-c674cb48de6c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+		sortByColumn: 'Quarter Number'
+
+	column 'Month Number'
+		isHidden
+		lineageTag: 6579e746-930b-448b-962c-4d9d3e0e9426
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Abbreviated month name, sorted chronologically via Month Number.
+	column 'Month Name'
+		lineageTag: 4ef9641a-8a2e-4a4d-80f0-838a8661ff5a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Name]
+		sortByColumn: 'Month Number'
+
+	/// yyyy-mm key for month-level trend axes.
+	column 'Year Month'
+		lineageTag: 264748dd-5050-4b62-9295-a34a34e456ed
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year Month]
+
+	column Day
+		lineageTag: f577f029-425a-4cbd-b37e-caf238107e21
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Number'
+		isHidden
+		lineageTag: 8f5c786a-09ee-49bf-b733-dd679e800e48
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Day of Week Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Name'
+		lineageTag: 43cbc452-a0e2-4411-a257-964d2f9634c3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Day of Week Name]
+		sortByColumn: 'Day of Week Number'
+
+	/// Yes for Monday-Friday. Markets data only exists on weekdays.
+	column 'Is Trading Weekday'
+		lineageTag: 1d852658-e057-42af-b8fb-556e28b26a85
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Is Trading Weekday]
+
+	column 'Week of Year'
+		lineageTag: 79d301b2-8af9-4436-b68e-cd852b9465f8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Week of Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	/// War phase id for this date. Boundaries are inlined (rather than read from the phases table) to avoid a circular dependency with the phases relationship; phase LABELS still come from the phases table. If the 6-phase boundaries in SQL ever change, update this expression to match.
+	column 'Phase Number' =
+			VAR _d = 'Date'[Date]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        _d <= DATE ( 2026, 2, 27 ), 1,
+			        _d <= DATE ( 2026, 4, 7 ), 2,
+			        _d <= DATE ( 2026, 4, 12 ), 3,
+			        _d <= DATE ( 2026, 6, 13 ), 4,
+			        _d <= DATE ( 2026, 7, 6 ), 5,
+			        6
+			    )
+		isHidden
+		lineageTag: 3fc807c9-21fd-46c1-9b82-d3c2e4888178
+		summarizeBy: none
+
+	partition Date = calculated
+		mode: import
+		source = ADDCOLUMNS ( CALENDAR ( DATE ( 2026, 1, 1 ), DATE ( 2026, 12, 31 ) ), "Year", YEAR ( [Date] ), "Quarter Number", QUARTER ( [Date] ), "Quarter", "Q" & QUARTER ( [Date] ), "Month Number", MONTH ( [Date] ), "Month Name", FORMAT ( [Date], "mmm" ), "Year Month", FORMAT ( [Date], "yyyy-mm" ), "Day", DAY ( [Date] ), "Day of Week Number", WEEKDAY ( [Date], 2 ), "Day of Week Name", FORMAT ( [Date], "ddd" ), "Is Trading Weekday", IF ( WEEKDAY ( [Date], 2 ) <= 5, "Yes", "No" ), "Week of Year", WEEKNUM ( [Date], 2 ) )
+

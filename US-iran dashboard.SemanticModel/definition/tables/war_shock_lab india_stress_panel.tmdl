@@ -1,0 +1,238 @@
+table 'war_shock_lab india_stress_panel'
+	lineageTag: bc38b436-66c6-4bba-bc34-e03632e003f0
+
+	/// India CPI inflation in percentage points (not a fraction). Sourced monthly and carried forward on the daily panel.
+	measure 'CPI Inflation' = AVERAGE ( 'war_shock_lab india_stress_panel'[cpi] )
+		formatString: 0.00"%"
+		displayFolder: Macro
+		lineageTag: 0804258d-9204-42f2-9a4d-9938c2cd415d
+
+	/// India WPI inflation in percentage points (not a fraction).
+	measure 'WPI Inflation' = AVERAGE ( 'war_shock_lab india_stress_panel'[wpi] )
+		formatString: 0.00"%"
+		displayFolder: Macro
+		lineageTag: bd3fbdd0-567d-4654-8393-e4ca7dc127cc
+
+	/// India 10-year government bond yield in percentage points (not a fraction).
+	measure 'G-Sec 10Y Yield' = AVERAGE ( 'war_shock_lab india_stress_panel'[gsec_10y_yield] )
+		formatString: 0.00"%"
+		displayFolder: Macro
+		lineageTag: 0b71e8a6-504e-42e2-a584-48046bfe4e78
+
+	/// Estimated current account deficit impact. Check units against the Milestone 3 notebook before quoting on a card.
+	measure 'CAD Estimate' = AVERAGE ( 'war_shock_lab india_stress_panel'[cad_estimate] )
+		formatString: #,##0.00
+		displayFolder: Macro
+		lineageTag: 5b973916-f79c-4334-94da-fa8ecb463cd4
+
+	/// Trailing 30-day realised Nifty volatility, stored as a fraction.
+	measure 'Nifty Volatility 30D' = AVERAGE ( 'war_shock_lab india_stress_panel'[nifty_vol_30d] )
+		formatString: 0.00%
+		displayFolder: Equity
+		lineageTag: 5eedf298-aabe-4029-8f9f-0a64f2e85802
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 5b32d6e3-4aef-4813-9603-4225d85b9c00
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80a34f59-b01f-4896-a1fb-c5ca91f36a87
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_name
+		dataType: string
+		isHidden
+		lineageTag: 557677ff-0e91-4d68-a75f-52e6b483ab5b
+		summarizeBy: none
+		sourceColumn: phase_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column brent_close
+		dataType: double
+		lineageTag: eac120f5-5072-41fe-955c-68aa9ab8c8ff
+		summarizeBy: none
+		sourceColumn: brent_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wti_close
+		dataType: double
+		lineageTag: 09c97b67-2804-42a2-b25e-83a0e810fb27
+		summarizeBy: none
+		sourceColumn: wti_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_level
+		dataType: double
+		lineageTag: 0a2f13b2-31a6-4991-9ef8-6dfc3fff7c75
+		summarizeBy: none
+		sourceColumn: nifty_level
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_return
+		dataType: double
+		lineageTag: 379de5ff-7092-40c7-8eca-97911b6c9f8f
+		summarizeBy: none
+		sourceColumn: nifty_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sensex_level
+		dataType: double
+		lineageTag: eb0a078a-1384-426e-8046-73dafcd4f4b5
+		summarizeBy: none
+		sourceColumn: sensex_level
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sensex_return
+		dataType: double
+		lineageTag: 2d468634-138d-4e8f-b369-b97f2b6831d4
+		summarizeBy: none
+		sourceColumn: sensex_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fii_net_flow
+		dataType: double
+		lineageTag: 346b9373-19b6-422e-8171-1a3a3f449b52
+		summarizeBy: sum
+		sourceColumn: fii_net_flow
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column usd_inr
+		dataType: double
+		lineageTag: 3f208c25-a979-4470-8e3e-6de0654dcfdd
+		summarizeBy: none
+		sourceColumn: usd_inr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column event_severity
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ac71334-9185-4987-9ae1-4f37becd6ffa
+		summarizeBy: none
+		sourceColumn: event_severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpi
+		dataType: double
+		isHidden
+		lineageTag: 82c03546-a971-4175-a101-d14f6696f4e3
+		summarizeBy: none
+		sourceColumn: cpi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wpi
+		dataType: double
+		isHidden
+		lineageTag: b0d8c1a5-e03e-4e92-a430-6179712be3dd
+		summarizeBy: none
+		sourceColumn: wpi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gsec_10y_yield
+		dataType: double
+		isHidden
+		lineageTag: 67753b88-ddb7-4e5b-b4c2-e0ce2a5319b5
+		summarizeBy: none
+		sourceColumn: gsec_10y_yield
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cad_estimate
+		dataType: double
+		isHidden
+		lineageTag: 378499dd-e732-4e84-acd9-b346b10be860
+		summarizeBy: none
+		sourceColumn: cad_estimate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column lost_bpd_estimate
+		dataType: int64
+		formatString: 0
+		lineageTag: 108dff8e-4e15-4651-bf24-179c14e170d1
+		summarizeBy: none
+		sourceColumn: lost_bpd_estimate
+
+		annotation SummarizationSetBy = Automatic
+
+	column fii_flow_30d_avg
+		dataType: double
+		lineageTag: ca381891-a15e-4448-ae50-be5e7e246086
+		summarizeBy: none
+		sourceColumn: fii_flow_30d_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_vol_30d
+		dataType: double
+		isHidden
+		lineageTag: 0c276bb7-0c01-426e-bbc8-2550e8bac174
+		summarizeBy: none
+		sourceColumn: nifty_vol_30d
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab india_stress_panel' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_india_stress_panel = Source{[Schema="war_shock_lab",Item="india_stress_panel"]}[Data]
+				in
+				    war_shock_lab_india_stress_panel
+
+	annotation PBI_ResultType = Table
+

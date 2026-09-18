@@ -1,0 +1,55 @@
+table 'war_shock_lab fx_rates'
+	lineageTag: 4b9d98ae-41ec-405b-9bb8-5a285dcca156
+
+	/// USD/INR close. Period average when more than one day is in context. Higher means a weaker rupee.
+	measure 'USD INR' = AVERAGE ( 'war_shock_lab fx_rates'[usd_inr_close] )
+		formatString: #,##0.00
+		displayFolder: FX
+		lineageTag: 2a36d375-91dd-4013-a5af-9f040c881fcd
+
+	/// Rupee move from the first to the last trading day in context. Positive means the rupee weakened against the dollar.
+	measure 'Rupee Depreciation %' =
+			VAR _minDate = MIN ( 'war_shock_lab fx_rates'[date] )
+			VAR _maxDate = MAX ( 'war_shock_lab fx_rates'[date] )
+			VAR _first = CALCULATE ( AVERAGE ( 'war_shock_lab fx_rates'[usd_inr_close] ), 'war_shock_lab fx_rates'[date] = _minDate )
+			VAR _last = CALCULATE ( AVERAGE ( 'war_shock_lab fx_rates'[usd_inr_close] ), 'war_shock_lab fx_rates'[date] = _maxDate )
+			RETURN
+			    DIVIDE ( _last - _first, _first )
+		formatString: 0.00%
+		displayFolder: FX
+		lineageTag: fa726eb8-7cc0-4fbb-9f44-0c678d25cec1
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: d49f76e2-5136-460e-baa5-bbb4d34d0ae4
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column usd_inr_close
+		dataType: double
+		isHidden
+		lineageTag: 78372bb7-12f7-404a-b162-14feb86abb21
+		summarizeBy: none
+		sourceColumn: usd_inr_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab fx_rates' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_fx_rates = Source{[Schema="war_shock_lab",Item="fx_rates"]}[Data]
+				in
+				    war_shock_lab_fx_rates
+
+	annotation PBI_ResultType = Table
+

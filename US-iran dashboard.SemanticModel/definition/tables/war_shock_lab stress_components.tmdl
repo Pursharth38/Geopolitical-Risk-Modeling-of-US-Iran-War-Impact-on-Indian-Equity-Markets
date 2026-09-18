@@ -1,0 +1,135 @@
+table 'war_shock_lab stress_components'
+	lineageTag: 9946bcc0-f929-494e-89f0-eadaac69da41
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 0b94b7d4-7579-4fd1-9fda-4e3ce338195a
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bb280399-62e6-45d1-9787-0d9d259e5bba
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_name
+		dataType: string
+		isHidden
+		lineageTag: 41c56b39-b9bc-4ad0-bf8e-f22da80aa982
+		summarizeBy: none
+		sourceColumn: phase_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column brent_close
+		dataType: double
+		lineageTag: d1147c05-2f26-44d0-83d5-2b35d6aa8e30
+		summarizeBy: none
+		sourceColumn: brent_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column usd_inr
+		dataType: double
+		lineageTag: a7c7c6a0-2819-4359-ae64-aeffc9bc1a20
+		summarizeBy: none
+		sourceColumn: usd_inr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fii_net_flow
+		dataType: double
+		lineageTag: ecf4d7e3-fa5b-490d-912a-8eab22fbc86d
+		summarizeBy: sum
+		sourceColumn: fii_net_flow
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_level
+		dataType: double
+		lineageTag: 1aca0b93-ee5c-414d-8bbd-122e7ad27e9c
+		summarizeBy: none
+		sourceColumn: nifty_level
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_drawdown_pct
+		dataType: double
+		lineageTag: 260c857a-c36c-4303-b67f-2df44ee65881
+		summarizeBy: none
+		sourceColumn: nifty_drawdown_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z_oil
+		dataType: double
+		lineageTag: 6ed0b43a-3545-4150-9f84-d318ec79de7f
+		summarizeBy: none
+		sourceColumn: z_oil
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z_inr
+		dataType: double
+		lineageTag: 6e49f640-6bbd-422e-8d15-c0db47f2fef7
+		summarizeBy: none
+		sourceColumn: z_inr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z_fii
+		dataType: double
+		lineageTag: 4d604b4d-46be-46fa-960e-f7c460c98d0b
+		summarizeBy: none
+		sourceColumn: z_fii
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z_equity
+		dataType: double
+		lineageTag: aab70bf2-9c9c-484e-a529-7e4939e5da0d
+		summarizeBy: none
+		sourceColumn: z_equity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab stress_components' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_stress_components = Source{[Schema="war_shock_lab",Item="stress_components"]}[Data]
+				in
+				    war_shock_lab_stress_components
+
+	annotation PBI_ResultType = Table
+

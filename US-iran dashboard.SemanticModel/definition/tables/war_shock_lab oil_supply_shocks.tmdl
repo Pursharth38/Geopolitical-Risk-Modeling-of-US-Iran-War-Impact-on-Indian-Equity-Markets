@@ -1,0 +1,51 @@
+table 'war_shock_lab oil_supply_shocks'
+	lineageTag: c34e5f1b-a6ab-49e8-bd4f-4c9c2baedef5
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: d9a5c798-6de7-4d08-9e82-c128d6ab47ac
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column lost_bpd_estimate
+		dataType: int64
+		formatString: 0
+		lineageTag: 57e47d13-f964-48a1-afe3-9a4015135706
+		summarizeBy: none
+		sourceColumn: lost_bpd_estimate
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: 0bb69373-3ef3-4696-a8f4-ea1988cb7915
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column scenario
+		dataType: string
+		lineageTag: c733881b-9bc5-4bbf-b552-d16cfad5e702
+		summarizeBy: none
+		sourceColumn: scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'war_shock_lab oil_supply_shocks' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_oil_supply_shocks = Source{[Schema="war_shock_lab",Item="oil_supply_shocks"]}[Data]
+				in
+				    war_shock_lab_oil_supply_shocks
+
+	annotation PBI_ResultType = Table
+

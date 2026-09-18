@@ -1,0 +1,599 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "war_shock_lab_war_events.max_event_severity": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab war_events",
+			          "ConceptualProperty": "Max Event Severity"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Event severity": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_oil_prices.brent_close": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab oil_prices",
+			          "ConceptualProperty": "Brent Close"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Brent": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_oil_prices.wti_close": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab oil_prices",
+			          "ConceptualProperty": "WTI Close"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "WTI": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hormuz_status.status_label": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Hormuz Status",
+			          "ConceptualProperty": "Status Label"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Status": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_stock_prices.symbol": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab stock_prices",
+			          "ConceptualProperty": "symbol"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Stock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_stock_prices.stock_period_return_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab stock_prices",
+			          "ConceptualProperty": "Stock Period Return %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Period return": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_stock_prices.sector": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab stock_prices",
+			          "ConceptualProperty": "sector"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sector": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_stock_prices.stock_close": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab stock_prices",
+			          "ConceptualProperty": "Stock Close"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Close": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_index_levels.index_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab index_levels",
+			          "ConceptualProperty": "index_name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sector index": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_index_levels.index_period_return_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab index_levels",
+			          "ConceptualProperty": "Index Period Return %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Period return": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_daily_panel.nifty_level": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab daily_panel",
+			          "ConceptualProperty": "Nifty Level"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Nifty": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_daily_panel.sensex_level": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab daily_panel",
+			          "ConceptualProperty": "Sensex Level"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Sensex": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_fii_flows.net_fii_flow": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab fii_flows",
+			          "ConceptualProperty": "Net FII Flow"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Net FII flow": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_fii_flows.cumulative_fii_flow": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab fii_flows",
+			          "ConceptualProperty": "Cumulative FII Flow"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cumulative FII flow": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_fx_rates.usd_inr": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab fx_rates",
+			          "ConceptualProperty": "USD INR"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "USD/INR": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_regime_summary_detail.variable": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab regime_summary_detail",
+			          "ConceptualProperty": "variable"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Metric": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_regime_summary_detail.unit": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab regime_summary_detail",
+			          "ConceptualProperty": "unit"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Unit": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_phases.phase": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab phases",
+			          "ConceptualProperty": "Phase"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Phase": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_india_stress_index.z_oil": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab india_stress_index",
+			          "ConceptualProperty": "Z Oil"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Oil": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_india_stress_index.z_equity": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab india_stress_index",
+			          "ConceptualProperty": "Z Equity"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Equity": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_india_stress_index.z_fii": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab india_stress_index",
+			          "ConceptualProperty": "Z FII"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "FII": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_india_stress_index.z_inr": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab india_stress_index",
+			          "ConceptualProperty": "Z INR"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Rupee": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "war_shock_lab_india_stress_index.stress_index": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "war_shock_lab india_stress_index",
+			          "ConceptualProperty": "Stress Index"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Stress index": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "scenario_grid.brent_shock": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Scenario Grid",
+			          "ConceptualProperty": "Brent Shock"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Brent shock": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "scenario_grid.scenario_nifty_return": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Scenario Grid",
+			          "ConceptualProperty": "Scenario Nifty Return"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Projected": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "scenario_grid.rupee_move": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Scenario Grid",
+			          "ConceptualProperty": "Rupee Move"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Rupee move": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "scenario_grid.scenario_low": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Scenario Grid",
+			          "ConceptualProperty": "Scenario Low"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Lower bound": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "scenario_grid.scenario_high": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Scenario Grid",
+			          "ConceptualProperty": "Scenario High"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Upper bound": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

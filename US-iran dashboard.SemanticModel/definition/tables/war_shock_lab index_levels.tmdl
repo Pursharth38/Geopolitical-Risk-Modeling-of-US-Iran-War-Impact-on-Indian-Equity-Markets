@@ -1,0 +1,80 @@
+table 'war_shock_lab index_levels'
+	lineageTag: 29ae6ddd-e7a4-4333-b17b-cac4347b362f
+
+	/// Sector index level. Slice by index_name. Period average when more than one day is in context.
+	measure 'Index Level' = AVERAGE ( 'war_shock_lab index_levels'[level] )
+		formatString: #,##0.00
+		displayFolder: Sector
+		lineageTag: 3c82b777-1776-4c99-b230-a92266ffa8a2
+
+	/// Sector index return from first to last trading day in context. This is the ranking measure for the sector rotation chart - put index_name on the axis and slice by phase.
+	measure 'Index Period Return %' =
+			VAR _minDate = MIN ( 'war_shock_lab index_levels'[date] )
+			VAR _maxDate = MAX ( 'war_shock_lab index_levels'[date] )
+			VAR _first = CALCULATE ( AVERAGE ( 'war_shock_lab index_levels'[level] ), 'war_shock_lab index_levels'[date] = _minDate )
+			VAR _last = CALCULATE ( AVERAGE ( 'war_shock_lab index_levels'[level] ), 'war_shock_lab index_levels'[date] = _maxDate )
+			RETURN
+			    DIVIDE ( _last - _first, _first )
+		formatString: 0.00%
+		displayFolder: Sector
+		lineageTag: d5fa2429-8c5a-487c-9d12-81f1c136ab3f
+
+	/// Average daily sector index return. Stored as a fraction.
+	measure 'Index Daily Return' = AVERAGE ( 'war_shock_lab index_levels'[daily_return] )
+		formatString: 0.00%
+		displayFolder: Sector
+		lineageTag: 10f1d06d-cfcd-4b04-b700-d6968df102ff
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 8a8640ff-f2bd-4fa2-8223-76f56d83320a
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column index_name
+		dataType: string
+		lineageTag: 72d7c0cb-b408-48bd-bcfc-54a7af49017a
+		summarizeBy: none
+		sourceColumn: index_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column level
+		dataType: double
+		isHidden
+		lineageTag: 1f623c5c-a69f-4ae6-8fec-7e5f46912159
+		summarizeBy: none
+		sourceColumn: level
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column daily_return
+		dataType: double
+		isHidden
+		lineageTag: 7210ed3a-73c4-4293-a117-10d670a0d18a
+		summarizeBy: none
+		sourceColumn: daily_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab index_levels' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_index_levels = Source{[Schema="war_shock_lab",Item="index_levels"]}[Data]
+				in
+				    war_shock_lab_index_levels
+
+	annotation PBI_ResultType = Table
+

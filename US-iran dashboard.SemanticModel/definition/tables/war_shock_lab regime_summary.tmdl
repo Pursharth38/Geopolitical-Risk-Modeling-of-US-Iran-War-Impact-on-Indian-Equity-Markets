@@ -1,0 +1,153 @@
+table 'war_shock_lab regime_summary'
+	lineageTag: 6eb57b94-528f-47fe-848b-304a34096f21
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 04acfb8b-25ea-4756-a662-511d58231334
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_name
+		dataType: string
+		isHidden
+		lineageTag: 98798baf-624e-416b-a1dd-ca8aafd099d7
+		summarizeBy: none
+		sourceColumn: phase_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d4d3cb9a-5d32-4d43-90f6-9436acb46fb3
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column end_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9f9d3845-3d7b-4a87-8385-792b7441f90d
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column n_trading_days
+		dataType: int64
+		formatString: 0
+		lineageTag: dbffb1a3-02ce-4fc3-a296-0f6ed404ebc8
+		summarizeBy: sum
+		sourceColumn: n_trading_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column brent_avg_usd
+		dataType: double
+		lineageTag: 13552817-e1e3-4c64-94c8-b5a975e0c608
+		summarizeBy: none
+		sourceColumn: brent_avg_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column usd_inr_avg
+		dataType: double
+		lineageTag: 17bf3dba-e66b-4937-a84b-bcf5c4edd1d4
+		summarizeBy: none
+		sourceColumn: usd_inr_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fii_avg_daily_cr
+		dataType: double
+		lineageTag: 67e62acd-e61c-4e56-92d7-108e8ec61b88
+		summarizeBy: none
+		sourceColumn: fii_avg_daily_cr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_ret_avg_pct
+		dataType: double
+		lineageTag: 6c9bfc4c-b4a6-4796-b783-6174b80556aa
+		summarizeBy: none
+		sourceColumn: nifty_ret_avg_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_vol_daily_pct
+		dataType: double
+		lineageTag: ff266b12-5483-464e-834e-3a0aad745c47
+		summarizeBy: none
+		sourceColumn: nifty_vol_daily_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gsec_10y_avg_pct
+		dataType: double
+		lineageTag: b828547c-9cef-42f7-85c6-9c724352613c
+		summarizeBy: none
+		sourceColumn: gsec_10y_avg_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gsec_n_obs
+		dataType: int64
+		formatString: 0
+		lineageTag: 4da5584c-9670-4d69-bc24-13446be58771
+		summarizeBy: sum
+		sourceColumn: gsec_n_obs
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpi_avg_pct
+		dataType: double
+		lineageTag: d5eed786-b346-42bd-955d-6758c5187ca9
+		summarizeBy: none
+		sourceColumn: cpi_avg_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wpi_avg_pct
+		dataType: double
+		lineageTag: 9eb9f973-8e30-4364-89ce-2d1da58b66b8
+		summarizeBy: none
+		sourceColumn: wpi_avg_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab regime_summary' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_regime_summary = Source{[Schema="war_shock_lab",Item="regime_summary"]}[Data]
+				in
+				    war_shock_lab_regime_summary
+
+	annotation PBI_ResultType = Table
+

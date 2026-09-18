@@ -1,0 +1,5 @@
+dataset,frequency,rows,coverage,status,note,fetched_at
+cpi_monthly,monthly,6,2026-01–2026-06,ok,"CPI headline YoY, Jan-Jun 2026 (MOSPI). Manually compiled.",2026-07-21T03:01:46
+wpi_monthly,monthly,6,2026-01–2026-06,ok,"WPI YoY, Jan-Jun 2026 (OEA/PIB). War signal in Apr. Manually compiled.",2026-07-21T03:01:46
+gsec_10y,sparse/daily-live,3,2026-05-31…2026-07-20,ok,10Y G-Sec: 3 curated points + live current value. Full history not freely obtainable.,2026-07-21T03:01:46
+cad_quarterly,quarterly,2,Q4-FY26…FY26,ok,Current account (RBI): Q4 FY26 + FY26 annual. Manually compiled.,2026-07-21T03:01:46

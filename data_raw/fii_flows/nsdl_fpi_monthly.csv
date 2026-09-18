@@ -1,0 +1,8 @@
+year,month,month_num,fpi_equity_net_cr,fpi_debt_general_cr,fpi_total_net_cr,unit,source,source_url,fetched_at
+2026,January,1,-35962.0,-7308.0,-29240.0,INR_crore,NSDL_FPI_yearwise,https://www.fpi.nsdl.co.in/Reports/Yearwise.aspx?RptType=6,2026-08-01T14:43:44
+2026,February,2,22615.0,5380.0,37804.0,INR_crore,NSDL_FPI_yearwise,https://www.fpi.nsdl.co.in/Reports/Yearwise.aspx?RptType=6,2026-08-01T14:43:44
+2026,March,3,-117775.0,6304.0,-125736.0,INR_crore,NSDL_FPI_yearwise,https://www.fpi.nsdl.co.in/Reports/Yearwise.aspx?RptType=6,2026-08-01T14:43:44
+2026,April,4,-60847.0,-7671.0,-70885.0,INR_crore,NSDL_FPI_yearwise,https://www.fpi.nsdl.co.in/Reports/Yearwise.aspx?RptType=6,2026-08-01T14:43:44
+2026,May,5,-32963.0,-100.0,-29484.0,INR_crore,NSDL_FPI_yearwise,https://www.fpi.nsdl.co.in/Reports/Yearwise.aspx?RptType=6,2026-08-01T14:43:44
+2026,June,6,-49340.0,30620.0,4669.0,INR_crore,NSDL_FPI_yearwise,https://www.fpi.nsdl.co.in/Reports/Yearwise.aspx?RptType=6,2026-08-01T14:43:44
+2026,July,7,20200.0,29212.0,40031.0,INR_crore,NSDL_FPI_yearwise,https://www.fpi.nsdl.co.in/Reports/Yearwise.aspx?RptType=6,2026-08-01T14:43:44

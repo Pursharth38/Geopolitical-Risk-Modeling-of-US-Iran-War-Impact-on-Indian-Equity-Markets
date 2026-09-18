@@ -1,0 +1,134 @@
+table 'war_shock_lab hormuz_status'
+	lineageTag: b7782ce3-90ca-48f7-b94e-060cadedf73b
+
+	/// Strait of Hormuz status on the most recent day in context.
+	measure 'Latest Hormuz Status' =
+			VAR _maxDate = MAX ( 'war_shock_lab hormuz_status'[date] )
+			RETURN
+			    CALCULATE (
+			        SELECTEDVALUE ( 'war_shock_lab hormuz_status'[status] ),
+			        'war_shock_lab hormuz_status'[date] = _maxDate
+			    )
+		displayFolder: Hormuz
+		lineageTag: 2402f573-2667-4328-a291-e04419086f18
+
+	/// Estimated barrels per day of transit lost on the most recent day in context.
+	measure 'Latest Lost BPD' =
+			VAR _maxDate = MAX ( 'war_shock_lab hormuz_status'[date] )
+			RETURN
+			    CALCULATE (
+			        SUM ( 'war_shock_lab hormuz_status'[lost_bpd_estimate] ),
+			        'war_shock_lab hormuz_status'[date] = _maxDate
+			    )
+		formatString: #,##0
+		displayFolder: Hormuz
+		lineageTag: 79543c5f-7841-4518-b86d-d4ca89f810f2
+
+	/// Worst single-day lost-throughput estimate in context.
+	measure 'Peak Lost BPD' = MAX ( 'war_shock_lab hormuz_status'[lost_bpd_estimate] )
+		formatString: #,##0
+		displayFolder: Hormuz
+		lineageTag: d53f0152-4f1f-4c87-9192-7faa46ae263b
+
+	/// Ships stranded on the most recent day in context.
+	measure 'Latest Ships Stranded' =
+			VAR _maxDate = MAX ( 'war_shock_lab hormuz_status'[date] )
+			RETURN
+			    CALCULATE (
+			        SUM ( 'war_shock_lab hormuz_status'[ships_stranded] ),
+			        'war_shock_lab hormuz_status'[date] = _maxDate
+			    )
+		formatString: #,##0
+		displayFolder: Hormuz
+		lineageTag: 9e56c859-ed5d-40d4-a34d-2021d6520301
+
+	/// Days at status_code 1 or higher (contested, partial, closed or blockaded) - i.e. any day the strait was not at open baseline.
+	measure 'Days Hormuz Disrupted' =
+			CALCULATE (
+			    COUNTROWS ( 'war_shock_lab hormuz_status' ),
+			    'war_shock_lab hormuz_status'[status_code] >= 1
+			)
+		formatString: #,##0
+		displayFolder: Hormuz
+		lineageTag: 34d8d994-6a2a-4cd3-9cba-cb12261d2568
+
+	/// Days at status_code 3 or higher - fully closed or under naval blockade.
+	measure 'Days Hormuz Closed' =
+			CALCULATE (
+			    COUNTROWS ( 'war_shock_lab hormuz_status' ),
+			    'war_shock_lab hormuz_status'[status_code] >= 3
+			)
+		formatString: #,##0
+		displayFolder: Hormuz
+		lineageTag: 3a0c91ff-02bb-4a4b-9dfb-123b510ac385
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 1657205e-1555-4d62-b431-e735555cbad7
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column status
+		dataType: string
+		lineageTag: f2e57389-725d-4576-8100-00230b1cb00c
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: af9aa994-322f-4f88-a8ba-56339a527e05
+		summarizeBy: sum
+		sourceColumn: status_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column lost_bpd_estimate
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 552ef2d3-62a2-4a58-b93f-8feb93c460e8
+		summarizeBy: sum
+		sourceColumn: lost_bpd_estimate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ships_stranded
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ffc95029-905a-47c8-afd8-1a15d8aaaff4
+		summarizeBy: sum
+		sourceColumn: ships_stranded
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_row_ids
+		dataType: string
+		isHidden
+		lineageTag: 629a2f09-913b-404c-8614-b9b559d44dae
+		summarizeBy: none
+		sourceColumn: source_row_ids
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'war_shock_lab hormuz_status' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_hormuz_status = Source{[Schema="war_shock_lab",Item="hormuz_status"]}[Data]
+				in
+				    war_shock_lab_hormuz_status
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,87 @@
+table 'war_shock_lab oil_prices'
+	lineageTag: 7604d709-d65c-4367-896e-71f59e870d77
+
+	/// Brent crude close in USD. At day grain this is the daily close; over a wider range it is the period average.
+	measure 'Brent Close' = AVERAGE ( 'war_shock_lab oil_prices'[brent_close] )
+		formatString: $#,##0.00
+		displayFolder: Oil
+		lineageTag: f18aa735-7e46-485c-b43f-f68f437dc403
+
+	/// WTI crude close in USD. Period average when more than one day is in context.
+	measure 'WTI Close' = AVERAGE ( 'war_shock_lab oil_prices'[wti_close] )
+		formatString: $#,##0.00
+		displayFolder: Oil
+		lineageTag: 7af2708f-3d91-4452-8a34-20dfbbe0c868
+
+	/// Highest Brent close reached within the current filter context.
+	measure 'Peak Brent' = MAX ( 'war_shock_lab oil_prices'[brent_close] )
+		formatString: $#,##0.00
+		displayFolder: Oil
+		lineageTag: 70d96bbd-5f28-4751-a604-e60a8885d867
+
+	/// Brent change from the first to the last trading day in context. Uses actual trading days, so it is safe across weekends and phase boundaries.
+	measure 'Brent Period Change %' =
+			VAR _minDate = MIN ( 'war_shock_lab oil_prices'[date] )
+			VAR _maxDate = MAX ( 'war_shock_lab oil_prices'[date] )
+			VAR _first = CALCULATE ( AVERAGE ( 'war_shock_lab oil_prices'[brent_close] ), 'war_shock_lab oil_prices'[date] = _minDate )
+			VAR _last = CALCULATE ( AVERAGE ( 'war_shock_lab oil_prices'[brent_close] ), 'war_shock_lab oil_prices'[date] = _maxDate )
+			RETURN
+			    DIVIDE ( _last - _first, _first )
+		formatString: 0.00%
+		displayFolder: Oil
+		lineageTag: 33e5484d-89f1-4bdd-be4e-d9d3dd0f5dd9
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: bb4a3ec3-807e-48c6-82c7-dd99470734d5
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column brent_close
+		dataType: double
+		isHidden
+		lineageTag: a5fed457-22b2-4416-9db5-71b8ed76a174
+		summarizeBy: none
+		sourceColumn: brent_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wti_close
+		dataType: double
+		isHidden
+		lineageTag: 0a9fde8c-3469-4e9a-b636-4647cef36dfe
+		summarizeBy: none
+		sourceColumn: wti_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column volume
+		dataType: int64
+		formatString: 0
+		lineageTag: 13a2e173-ce8c-444e-aa45-c9423e55cfd2
+		summarizeBy: sum
+		sourceColumn: volume
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'war_shock_lab oil_prices' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_oil_prices = Source{[Schema="war_shock_lab",Item="oil_prices"]}[Data]
+				in
+				    war_shock_lab_oil_prices
+
+	annotation PBI_ResultType = Table
+

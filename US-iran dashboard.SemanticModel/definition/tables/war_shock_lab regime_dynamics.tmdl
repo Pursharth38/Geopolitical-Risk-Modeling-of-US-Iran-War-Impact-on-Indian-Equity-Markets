@@ -1,0 +1,164 @@
+table 'war_shock_lab regime_dynamics'
+	lineageTag: ab56acdb-b30f-4866-b8bf-fcce14bd5762
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 99ba5a4c-4ef1-4f51-9d0b-a304caab7837
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_name
+		dataType: string
+		isHidden
+		lineageTag: 061672e3-6368-4ee5-8765-c60db2a0594f
+		summarizeBy: none
+		sourceColumn: phase_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c8baf7e1-bb8e-45a5-8a58-9010915314ef
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column end_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 28e20632-2b5e-4ded-8dc8-f19ba0570200
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column n_trading_days
+		dataType: int64
+		formatString: 0
+		lineageTag: b3dd419c-87dd-40d9-8d60-656b7411ca52
+		summarizeBy: sum
+		sourceColumn: n_trading_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column nifty_entry
+		dataType: double
+		lineageTag: 70c72ab5-96c9-4baa-9e5f-c023ed1c35fe
+		summarizeBy: none
+		sourceColumn: nifty_entry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_exit
+		dataType: double
+		lineageTag: 5eee8775-87bf-40af-ae50-f2f1cfcc0d24
+		summarizeBy: none
+		sourceColumn: nifty_exit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_phase_return_pct
+		dataType: double
+		lineageTag: 84f206b5-1cfc-48b7-8d1f-0f9ddb3664e4
+		summarizeBy: none
+		sourceColumn: nifty_phase_return_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column brent_entry
+		dataType: double
+		lineageTag: 8c56b474-00d3-4ecb-8755-622d976b0982
+		summarizeBy: none
+		sourceColumn: brent_entry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column brent_exit
+		dataType: double
+		lineageTag: d81e1c4d-fe82-40ae-a6dd-977920bff1a1
+		summarizeBy: none
+		sourceColumn: brent_exit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column brent_phase_change_pct
+		dataType: double
+		lineageTag: 50eea6c5-dd0d-45a0-9d5d-f31b6f27f6a8
+		summarizeBy: none
+		sourceColumn: brent_phase_change_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column usd_inr_entry
+		dataType: double
+		lineageTag: a8ff9ca7-7113-4064-9492-785bb7992079
+		summarizeBy: none
+		sourceColumn: usd_inr_entry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column usd_inr_exit
+		dataType: double
+		lineageTag: 07b5aaa1-6eb5-4b53-8c36-16ea60842f2a
+		summarizeBy: sum
+		sourceColumn: usd_inr_exit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column inr_depreciation_pct
+		dataType: double
+		lineageTag: 1672802c-e93d-4a10-b4cc-5c9299a31bf6
+		summarizeBy: none
+		sourceColumn: inr_depreciation_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fii_total_cr
+		dataType: double
+		lineageTag: fa82ac2b-64ed-48d4-a768-6cdb5b9e5597
+		summarizeBy: sum
+		sourceColumn: fii_total_cr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab regime_dynamics' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_regime_dynamics = Source{[Schema="war_shock_lab",Item="regime_dynamics"]}[Data]
+				in
+				    war_shock_lab_regime_dynamics
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,66 @@
+table 'war_shock_lab macro_india'
+	lineageTag: 6225f526-99f7-47ad-b1c4-f3ff8049019c
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 92ecd174-3a22-464c-98b4-673c475de1e2
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column cpi
+		dataType: double
+		lineageTag: 656065ec-add7-4c69-8741-b5899c0bcdcc
+		summarizeBy: none
+		sourceColumn: cpi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wpi
+		dataType: double
+		lineageTag: 94e13346-9058-47c4-b9b9-f540dd6e6347
+		summarizeBy: none
+		sourceColumn: wpi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column gsec_10y_yield
+		dataType: double
+		lineageTag: 0f256ac1-27c7-4435-86c2-5831a3b893c0
+		summarizeBy: none
+		sourceColumn: gsec_10y_yield
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cad_estimate
+		dataType: double
+		lineageTag: beb57620-1256-4bce-bfdc-0b4a40473dab
+		summarizeBy: none
+		sourceColumn: cad_estimate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab macro_india' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_macro_india = Source{[Schema="war_shock_lab",Item="macro_india"]}[Data]
+				in
+				    war_shock_lab_macro_india
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,15 @@
+# War Shock Stress Lab — Milestone 1 (data collection)
+# Pinned to a lower bound; tested with the versions installed on 2026-07-16.
+yfinance>=0.2.40
+pandas>=2.0
+
+# War-events scraping (Track 2A)
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+openpyxl>=3.1   # read the human-curated war-events / Hormuz .xlsx
+
+# Milestone 2 — SQL warehouse + analysis
+SQLAlchemy>=2.0
+mysql-connector-python>=8.0
+statsmodels>=0.14   # OLS regression notebook

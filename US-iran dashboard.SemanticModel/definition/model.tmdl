@@ -1,0 +1,41 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
+
+annotation PBI_QueryOrder = ["war_shock_lab daily_panel","war_shock_lab india_stress_index","war_shock_lab india_stress_panel","war_shock_lab regime_dynamics","war_shock_lab regime_summary","war_shock_lab stress_baseline","war_shock_lab regime_summary_detail","war_shock_lab stress_components","war_shock_lab fii_flows","war_shock_lab fx_rates","war_shock_lab hormuz_status","war_shock_lab index_levels","war_shock_lab oil_prices","war_shock_lab macro_india","war_shock_lab oil_supply_shocks","war_shock_lab phases","war_shock_lab stock_prices","war_shock_lab war_events"]
+
+ref table 'war_shock_lab daily_panel'
+ref table 'war_shock_lab india_stress_index'
+ref table 'war_shock_lab india_stress_panel'
+ref table 'war_shock_lab regime_dynamics'
+ref table 'war_shock_lab regime_summary'
+ref table 'war_shock_lab stress_baseline'
+ref table 'war_shock_lab regime_summary_detail'
+ref table 'war_shock_lab stress_components'
+ref table 'war_shock_lab fii_flows'
+ref table 'war_shock_lab fx_rates'
+ref table 'war_shock_lab hormuz_status'
+ref table 'war_shock_lab index_levels'
+ref table 'war_shock_lab oil_prices'
+ref table 'war_shock_lab macro_india'
+ref table 'war_shock_lab oil_supply_shocks'
+ref table 'war_shock_lab phases'
+ref table 'war_shock_lab stock_prices'
+ref table 'war_shock_lab war_events'
+ref table Date
+ref table 'Hormuz Status'
+ref table 'Scenario Grid'
+ref table 'Hormuz Geography'
+
+ref cultureInfo en-US
+

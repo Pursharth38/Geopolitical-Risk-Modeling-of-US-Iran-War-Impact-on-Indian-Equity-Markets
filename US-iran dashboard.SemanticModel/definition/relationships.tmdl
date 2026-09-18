@@ -1,0 +1,72 @@
+relationship 'Date to daily_panel'
+	fromColumn: 'war_shock_lab daily_panel'.date
+	toColumn: Date.Date
+
+relationship 'Date to india_stress_index'
+	fromColumn: 'war_shock_lab india_stress_index'.date
+	toColumn: Date.Date
+
+relationship 'Date to india_stress_panel'
+	fromColumn: 'war_shock_lab india_stress_panel'.date
+	toColumn: Date.Date
+
+relationship 'Date to stress_components'
+	fromColumn: 'war_shock_lab stress_components'.date
+	toColumn: Date.Date
+
+relationship 'Date to fii_flows'
+	fromColumn: 'war_shock_lab fii_flows'.date
+	toColumn: Date.Date
+
+relationship 'Date to fx_rates'
+	fromColumn: 'war_shock_lab fx_rates'.date
+	toColumn: Date.Date
+
+relationship 'Date to hormuz_status'
+	fromColumn: 'war_shock_lab hormuz_status'.date
+	toColumn: Date.Date
+
+relationship 'Date to index_levels'
+	fromColumn: 'war_shock_lab index_levels'.date
+	toColumn: Date.Date
+
+relationship 'Date to oil_prices'
+	fromColumn: 'war_shock_lab oil_prices'.date
+	toColumn: Date.Date
+
+relationship 'Date to macro_india'
+	fromColumn: 'war_shock_lab macro_india'.date
+	toColumn: Date.Date
+
+relationship 'Date to oil_supply_shocks'
+	fromColumn: 'war_shock_lab oil_supply_shocks'.date
+	toColumn: Date.Date
+
+relationship 'Date to stock_prices'
+	fromColumn: 'war_shock_lab stock_prices'.date
+	toColumn: Date.Date
+
+relationship 'Date to war_events'
+	fromColumn: 'war_shock_lab war_events'.date
+	toColumn: Date.Date
+
+relationship 'phases to regime_dynamics'
+	fromColumn: 'war_shock_lab regime_dynamics'.phase_id
+	toColumn: 'war_shock_lab phases'.phase_id
+
+relationship 'phases to regime_summary'
+	fromColumn: 'war_shock_lab regime_summary'.phase_id
+	toColumn: 'war_shock_lab phases'.phase_id
+
+relationship 'phases to regime_summary_detail'
+	fromColumn: 'war_shock_lab regime_summary_detail'.phase_id
+	toColumn: 'war_shock_lab phases'.phase_id
+
+relationship 'phases to Date'
+	fromColumn: Date.'Phase Number'
+	toColumn: 'war_shock_lab phases'.phase_id
+
+relationship 'Hormuz Status to hormuz_status'
+	fromColumn: 'war_shock_lab hormuz_status'.status_code
+	toColumn: 'Hormuz Status'.'Status Code'
+

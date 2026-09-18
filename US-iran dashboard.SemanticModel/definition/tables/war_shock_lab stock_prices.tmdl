@@ -1,0 +1,87 @@
+table 'war_shock_lab stock_prices'
+	lineageTag: d6c6152e-e81d-47d0-b1f7-ca57495718dc
+
+	/// Stock close in INR. Slice by symbol or sector. Period average when more than one day is in context.
+	measure 'Stock Close' = AVERAGE ( 'war_shock_lab stock_prices'[close] )
+		formatString: #,##0.00
+		displayFolder: Stocks
+		lineageTag: 4a014861-88e0-43e4-9a1c-d6106a460139
+
+	/// Stock return from first to last trading day in context. Drives the drill-down from sector to individual names.
+	measure 'Stock Period Return %' =
+			VAR _minDate = MIN ( 'war_shock_lab stock_prices'[date] )
+			VAR _maxDate = MAX ( 'war_shock_lab stock_prices'[date] )
+			VAR _first = CALCULATE ( AVERAGE ( 'war_shock_lab stock_prices'[close] ), 'war_shock_lab stock_prices'[date] = _minDate )
+			VAR _last = CALCULATE ( AVERAGE ( 'war_shock_lab stock_prices'[close] ), 'war_shock_lab stock_prices'[date] = _maxDate )
+			RETURN
+			    DIVIDE ( _last - _first, _first )
+		formatString: 0.00%
+		displayFolder: Stocks
+		lineageTag: bea67499-11cb-420e-8291-2dd3a6a2134e
+
+	/// Traded volume, additive across days and symbols.
+	measure 'Stock Volume' = SUM ( 'war_shock_lab stock_prices'[volume] )
+		formatString: #,##0
+		displayFolder: Stocks
+		lineageTag: 4b186903-3671-409c-8e82-05cfacf356cf
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 9091d0d0-3292-44b7-9255-8a0225b62d38
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column symbol
+		dataType: string
+		lineageTag: 20c0ed90-db02-41db-818d-8eef7d0ffaff
+		summarizeBy: none
+		sourceColumn: symbol
+
+		annotation SummarizationSetBy = Automatic
+
+	column close
+		dataType: double
+		isHidden
+		lineageTag: 2f10e70b-4dee-41f2-8c19-bc834ecfb452
+		summarizeBy: none
+		sourceColumn: close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column volume
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e5833d18-c229-4be7-98f2-f61d24aa4d96
+		summarizeBy: sum
+		sourceColumn: volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column sector
+		dataType: string
+		lineageTag: 6622ead1-a51a-4338-8080-5d6317ad1e7a
+		summarizeBy: none
+		sourceColumn: sector
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'war_shock_lab stock_prices' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_stock_prices = Source{[Schema="war_shock_lab",Item="stock_prices"]}[Data]
+				in
+				    war_shock_lab_stock_prices
+
+	annotation PBI_ResultType = Table
+

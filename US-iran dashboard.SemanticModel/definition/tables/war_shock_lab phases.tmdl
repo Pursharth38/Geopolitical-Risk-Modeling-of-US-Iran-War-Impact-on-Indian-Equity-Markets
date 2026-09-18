@@ -1,0 +1,56 @@
+table 'war_shock_lab phases'
+	lineageTag: 4637cad0-0cff-4854-8e8b-d3b32bae1c02
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 85462acc-c770-4f75-b0ca-9b78571d3a6b
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// War phase label. Six sequential phases spanning Jan-Jul 2026. Sorted chronologically by phase_id.
+	column Phase
+		dataType: string
+		lineageTag: d408ad48-bfb6-44b1-ad96-2b38172ae4d1
+		summarizeBy: none
+		sourceColumn: name
+		sortByColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Phase Start'
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: bfc58ebd-e0a9-483e-9587-97d1a40f0ed8
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Phase End'
+		dataType: dateTime
+		formatString: dd mmm yyyy
+		lineageTag: e96bf96c-3c43-4627-835a-3a79331829a1
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'war_shock_lab phases' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_phases = Source{[Schema="war_shock_lab",Item="phases"]}[Data]
+				in
+				    war_shock_lab_phases
+
+	annotation PBI_ResultType = Table
+

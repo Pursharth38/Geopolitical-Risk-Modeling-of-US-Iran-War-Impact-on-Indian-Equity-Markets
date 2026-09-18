@@ -1,0 +1,113 @@
+table 'war_shock_lab stress_baseline'
+	lineageTag: 42b56167-1932-4666-be3b-3797cbe71e43
+
+	column prewar_peak
+		dataType: double
+		lineageTag: b56995ae-204e-4a12-8568-18f987c06ff7
+		summarizeBy: none
+		sourceColumn: prewar_peak
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column baseline_days
+		dataType: int64
+		formatString: 0
+		lineageTag: cc4c6057-ae43-414e-a89b-59efc1dcb56b
+		summarizeBy: sum
+		sourceColumn: baseline_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column brent_mu
+		dataType: double
+		lineageTag: 2f6925d2-29f6-43f6-bd28-71ad3def1f67
+		summarizeBy: none
+		sourceColumn: brent_mu
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column brent_sd
+		dataType: double
+		lineageTag: e104a950-5190-4a4f-835c-48d90a5dee17
+		summarizeBy: none
+		sourceColumn: brent_sd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fx_mu
+		dataType: double
+		lineageTag: e225e33e-00d5-473e-be86-d3d3b9d75581
+		summarizeBy: none
+		sourceColumn: fx_mu
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fx_sd
+		dataType: double
+		lineageTag: 80db4098-81d1-425b-b724-1534514ece68
+		summarizeBy: none
+		sourceColumn: fx_sd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fii_mu
+		dataType: double
+		lineageTag: 23cd04b6-ccd4-4ec1-a859-55a3b6372755
+		summarizeBy: none
+		sourceColumn: fii_mu
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fii_sd
+		dataType: double
+		lineageTag: ddffc143-7a09-49a1-ad08-884ba30ab4b9
+		summarizeBy: none
+		sourceColumn: fii_sd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dd_mu
+		dataType: double
+		lineageTag: ed643ab7-8cf3-48a1-9478-beb0963e9a32
+		summarizeBy: none
+		sourceColumn: dd_mu
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column dd_sd
+		dataType: double
+		lineageTag: b1ce5ac4-2eac-4983-be64-0dc89abbad2e
+		summarizeBy: none
+		sourceColumn: dd_sd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab stress_baseline' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_stress_baseline = Source{[Schema="war_shock_lab",Item="stress_baseline"]}[Data]
+				in
+				    war_shock_lab_stress_baseline
+
+	annotation PBI_ResultType = Table
+

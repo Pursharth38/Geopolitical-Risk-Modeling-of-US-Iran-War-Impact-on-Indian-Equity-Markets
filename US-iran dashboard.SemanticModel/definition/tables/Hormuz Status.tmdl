@@ -1,0 +1,60 @@
+/// Strait of Hormuz status dimension (codes 0-4). Derived from the Legend & Method sheet of Hormuz_Status_Timeline.xlsx, so labels, colours and meanings stay single-sourced to that workbook. Hex ramp escalates green to deep red.
+table 'Hormuz Status'
+	lineageTag: 0980d086-f6e3-4c2e-82f2-1d4123c79784
+
+	/// 0-4 escalation ladder. Foreign key from hormuz_status.
+	column 'Status Code'
+		isHidden
+		lineageTag: 66d9d2f1-cd23-4e8c-99c5-13cb9bdfd36b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Status Code]
+
+	/// Open / Contested / Partial / Closed / Blockade. Sorted by escalation severity, not alphabetically.
+	column 'Status Label'
+		lineageTag: f2d509d9-85dc-405f-b76b-6b182cb39bc0
+		isNameInferred
+		sourceColumn: [Status Label]
+		sortByColumn: 'Status Code'
+
+	column 'Status Colour'
+		lineageTag: 6601c055-9c70-4c92-92b4-d8d337edf210
+		isNameInferred
+		sourceColumn: [Status Colour]
+
+	column 'Status Meaning'
+		lineageTag: 814f9dcb-5279-49a4-bdc5-155a1c361211
+		isNameInferred
+		sourceColumn: [Status Meaning]
+
+	/// Hex colour for conditional formatting, escalating green to deep red.
+	column 'Status Hex'
+		isHidden
+		lineageTag: b890f86d-1f0b-4133-bd14-d45d30e95434
+		isNameInferred
+		sourceColumn: [Status Hex]
+
+	partition 'Hormuz Status' = calculated
+		mode: import
+		source =
+				VAR _legend =
+				    FILTER ( 'Legend & Method', NOT ISBLANK ( 'Legend & Method'[Map Color] ) )
+				RETURN
+				    SELECTCOLUMNS (
+				        _legend,
+				        "Status Code", INT ( VALUE ( 'Legend & Method'[Status Code] ) ),
+				        "Status Label", 'Legend & Method'[Label],
+				        "Status Colour", 'Legend & Method'[Map Color],
+				        "Status Meaning", 'Legend & Method'[Meaning],
+				        "Status Hex",
+				            SWITCH (
+				                VALUE ( 'Legend & Method'[Status Code] ),
+				                0, "#1B7F4B",
+				                1, "#E3B505",
+				                2, "#E8811A",
+				                3, "#C4471C",
+				                4, "#8E1B18",
+				                "#9E9E9E"
+				            )
+				    )
+

@@ -1,0 +1,78 @@
+table 'war_shock_lab fii_flows'
+	lineageTag: cb501835-0c42-468e-af06-82e97fde7bb5
+
+	/// Net foreign institutional equity flow in INR crore. Negative values are outflows. Additive across days.
+	measure 'Net FII Flow' = SUM ( 'war_shock_lab fii_flows'[net_equity_flow_inr] )
+		formatString: #,##0
+		displayFolder: FII
+		lineageTag: 9b754a57-e884-4a7d-824e-ab403264e02f
+
+	/// Running total of net FII flow from the start of the calendar to the current date. Drives the cumulative outflow line.
+	measure 'Cumulative FII Flow' =
+			VAR _maxDate = MAX ( 'Date'[Date] )
+			RETURN
+			    CALCULATE (
+			        SUM ( 'war_shock_lab fii_flows'[net_equity_flow_inr] ),
+			        REMOVEFILTERS ( 'Date' ),
+			        'Date'[Date] <= _maxDate
+			    )
+		formatString: #,##0
+		displayFolder: FII
+		lineageTag: af76536d-8665-42ef-8876-72e92741c448
+
+	/// Largest single-day net outflow in context. Most negative daily value, so a smaller number is a worse day.
+	measure 'Peak Single Day Outflow' = MIN ( 'war_shock_lab fii_flows'[net_equity_flow_inr] )
+		formatString: #,##0
+		displayFolder: FII
+		lineageTag: 432b39ba-637d-4485-8ac7-09c525f9ae41
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: b3a9bd1d-37a1-4971-b30d-f1cf9c1ceea6
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column net_equity_flow_inr
+		dataType: double
+		isHidden
+		lineageTag: e56092d8-c6d9-408e-95c2-0995412f4916
+		summarizeBy: sum
+		sourceColumn: net_equity_flow_inr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column asset_class
+		dataType: string
+		lineageTag: c48c1663-6e63-462f-936a-4936e9b54b25
+		summarizeBy: none
+		sourceColumn: asset_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: 9999df24-5733-4de0-945e-e7ecb977b18e
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'war_shock_lab fii_flows' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_fii_flows = Source{[Schema="war_shock_lab",Item="fii_flows"]}[Data]
+				in
+				    war_shock_lab_fii_flows
+
+	annotation PBI_ResultType = Table
+

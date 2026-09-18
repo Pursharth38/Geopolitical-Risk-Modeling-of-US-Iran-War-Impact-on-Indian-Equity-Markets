@@ -1,0 +1,162 @@
+table 'war_shock_lab india_stress_index'
+	lineageTag: 0340f7a4-ab79-465f-a526-ad00a16a475a
+
+	/// Composite India War Stress Index - a z-score blend of oil, equity, FII and INR components. Roughly zero at pre-war baseline; observed range is about -1.3 to 8.2.
+	measure 'Stress Index' = AVERAGE ( 'war_shock_lab india_stress_index'[stress_index] )
+		formatString: #,##0.00
+		displayFolder: Stress
+		lineageTag: fc28f0a1-efbc-4945-8432-ed3dc0da8612
+
+	/// Highest stress index reading in context.
+	measure 'Peak Stress Index' = MAX ( 'war_shock_lab india_stress_index'[stress_index] )
+		formatString: #,##0.00
+		displayFolder: Stress
+		lineageTag: 2cdf117d-5dc8-4789-95df-b153f662d32e
+
+	/// Worst Nifty drawdown from the pre-war peak, in percentage points (not a fraction). Stored positive, so MAX is the deepest drawdown.
+	measure 'Nifty Drawdown %' = MAX ( 'war_shock_lab india_stress_index'[nifty_drawdown_pct] )
+		formatString: 0.00"%"
+		displayFolder: Stress
+		lineageTag: 318a8307-aa53-459e-9861-f1af8ed42a32
+
+	/// Oil component z-score contributing to the composite stress index.
+	measure 'Z Oil' = AVERAGE ( 'war_shock_lab india_stress_index'[z_oil] )
+		formatString: #,##0.00
+		displayFolder: Stress\Components
+		lineageTag: 780bf4bf-bc12-4ccc-927f-cd5318eb0a91
+
+	/// Equity component z-score contributing to the composite stress index.
+	measure 'Z Equity' = AVERAGE ( 'war_shock_lab india_stress_index'[z_equity] )
+		formatString: #,##0.00
+		displayFolder: Stress\Components
+		lineageTag: 3750ff59-560c-45b4-852a-46c9f725acf4
+
+	/// FII-flow component z-score contributing to the composite stress index.
+	measure 'Z FII' = AVERAGE ( 'war_shock_lab india_stress_index'[z_fii] )
+		formatString: #,##0.00
+		displayFolder: Stress\Components
+		lineageTag: 6f963262-728f-4e93-8f1a-f3f601f28777
+
+	/// Rupee component z-score contributing to the composite stress index.
+	measure 'Z INR' = AVERAGE ( 'war_shock_lab india_stress_index'[z_inr] )
+		formatString: #,##0.00
+		displayFolder: Stress\Components
+		lineageTag: ef0b5719-5791-45d8-a070-4986f0c8a941
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 20fd9951-4f0d-4828-a057-1577e3e2f93b
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ac795cf1-b875-4a3a-a2c9-c1c2d19de5c7
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_name
+		dataType: string
+		isHidden
+		lineageTag: 4fed4c32-1eb6-4980-867e-78e70fdad4cf
+		summarizeBy: none
+		sourceColumn: phase_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column z_oil
+		dataType: double
+		isHidden
+		lineageTag: 8f512c8a-86b3-4a3a-be99-8a05261644a3
+		summarizeBy: none
+		sourceColumn: z_oil
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z_inr
+		dataType: double
+		isHidden
+		lineageTag: b68f5cd2-c2b2-4900-8f61-e71d3f518098
+		summarizeBy: none
+		sourceColumn: z_inr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z_fii
+		dataType: double
+		isHidden
+		lineageTag: f30e1fe0-ff1a-4976-990e-1a291c2a190d
+		summarizeBy: none
+		sourceColumn: z_fii
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column z_equity
+		dataType: double
+		isHidden
+		lineageTag: aa9021f1-b3f2-49c2-957d-e4159cb4512f
+		summarizeBy: none
+		sourceColumn: z_equity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column n_components
+		dataType: int64
+		formatString: 0
+		lineageTag: 70bd2c05-32d0-4d06-a675-9d38aec22001
+		summarizeBy: none
+		sourceColumn: n_components
+
+		annotation SummarizationSetBy = Automatic
+
+	column stress_index
+		dataType: double
+		isHidden
+		lineageTag: a11ad8aa-ef88-4474-b909-692347aaf53a
+		summarizeBy: none
+		sourceColumn: stress_index
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_drawdown_pct
+		dataType: double
+		isHidden
+		lineageTag: 6919be41-4b38-4e74-b8de-2e837fd381b5
+		summarizeBy: none
+		sourceColumn: nifty_drawdown_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'war_shock_lab india_stress_index' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_india_stress_index = Source{[Schema="war_shock_lab",Item="india_stress_index"]}[Data]
+				in
+				    war_shock_lab_india_stress_index
+
+	annotation PBI_ResultType = Table
+

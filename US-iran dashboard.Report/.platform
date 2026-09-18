@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "US-iran dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "de4f414c-3da6-47a0-8e85-a91b5bc7dd55"
+  }
+}

@@ -1,0 +1,62 @@
+/// Reference geography for the Strait of Hormuz chokepoint and the three ports whose traffic it governs. Coordinates are real published locations. Pin colour is driven by the strait-level status; pin size is deliberately uniform because the source data has no per-location breakdown of lost throughput.
+table 'Hormuz Geography'
+	lineageTag: e8e2f9ad-28d5-4918-a047-070f03aadaba
+
+	/// Chokepoint and port names. Sorted by geographic sequence, not alphabetically.
+	column Location
+		lineageTag: b8f99b6b-3313-41b5-9fcb-dbf62e98ff64
+		dataCategory: Place
+		isNameInferred
+		sourceColumn: [Location]
+		sortByColumn: 'Sort Order'
+
+	column 'Location Type'
+		lineageTag: 8d965006-92d0-426f-86ab-597b73ef8bca
+		isNameInferred
+		sourceColumn: [Location Type]
+
+	column Country
+		lineageTag: 777b7227-aff3-4f89-9cec-21a63f6633a9
+		dataCategory: Country
+		isNameInferred
+		sourceColumn: [Country]
+
+	column Latitude
+		lineageTag: e5f510b5-d457-4d21-b4c3-8230a950d6e4
+		dataCategory: Latitude
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Latitude]
+
+	column Longitude
+		lineageTag: a529e798-09a9-431b-8395-721bc20a2664
+		dataCategory: Longitude
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Longitude]
+
+	column 'Sort Order'
+		isHidden
+		lineageTag: d0d2abd4-ad2a-4cdc-b323-73e341d8ae0d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Sort Order]
+
+	partition 'Hormuz Geography' = calculated
+		mode: import
+		source =
+				DATATABLE (
+				    "Location", STRING,
+				    "Location Type", STRING,
+				    "Country", STRING,
+				    "Latitude", DOUBLE,
+				    "Longitude", DOUBLE,
+				    "Sort Order", INTEGER,
+				    {
+				        { "Strait of Hormuz", "Chokepoint", "Oman / Iran", 26.5667, 56.2500, 1 },
+				        { "Bandar Abbas", "Port", "Iran", 27.1833, 56.2667, 2 },
+				        { "Fujairah", "Port", "United Arab Emirates", 25.1288, 56.3265, 3 },
+				        { "Dubai", "Port", "United Arab Emirates", 25.2048, 55.2708, 4 }
+				    }
+				)
+

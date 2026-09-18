@@ -1,0 +1,174 @@
+table 'war_shock_lab daily_panel'
+	lineageTag: a07669f7-2a04-40b7-bd85-68ce42c8626f
+
+	/// Nifty 50 index level. Period average when more than one day is in context.
+	measure 'Nifty Level' = AVERAGE ( 'war_shock_lab daily_panel'[nifty_level] )
+		formatString: #,##0
+		displayFolder: Equity
+		lineageTag: e8b0a7e6-fbe8-461b-a964-b83653dd37f8
+
+	/// Sensex index level. Period average when more than one day is in context.
+	measure 'Sensex Level' = AVERAGE ( 'war_shock_lab daily_panel'[sensex_level] )
+		formatString: #,##0
+		displayFolder: Equity
+		lineageTag: e163694c-8228-4ff9-8c04-0346a2106854
+
+	/// Average daily Nifty return. Stored as a fraction. Do not read this as a period return - use Nifty Period Return % for that.
+	measure 'Nifty Daily Return' = AVERAGE ( 'war_shock_lab daily_panel'[nifty_return] )
+		formatString: 0.00%
+		displayFolder: Equity
+		lineageTag: 1881c7d3-f2f9-40a7-a797-612d5def17dd
+
+	/// Nifty return from first to last trading day in context. Use this for phase-over-phase comparisons.
+	measure 'Nifty Period Return %' =
+			VAR _minDate = MIN ( 'war_shock_lab daily_panel'[date] )
+			VAR _maxDate = MAX ( 'war_shock_lab daily_panel'[date] )
+			VAR _first = CALCULATE ( AVERAGE ( 'war_shock_lab daily_panel'[nifty_level] ), 'war_shock_lab daily_panel'[date] = _minDate )
+			VAR _last = CALCULATE ( AVERAGE ( 'war_shock_lab daily_panel'[nifty_level] ), 'war_shock_lab daily_panel'[date] = _maxDate )
+			RETURN
+			    DIVIDE ( _last - _first, _first )
+		formatString: 0.00%
+		displayFolder: Equity
+		lineageTag: a6a6643e-b798-4357-81a9-1558676bfdeb
+
+	/// USD/INR as carried on the daily panel. Prefer [USD INR] from fx_rates; this exists so the panel can be charted without a second table.
+	measure 'USD INR (Panel)' = AVERAGE ( 'war_shock_lab daily_panel'[usd_inr] )
+		formatString: #,##0.00
+		displayFolder: FX
+		lineageTag: 532eabdd-0531-44fb-bf41-a6edf89611a0
+
+	column date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 20adea45-b76a-4de6-983a-151206cf7ca4
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column phase_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ba9ded43-9d60-4405-b9ef-57be31a176f2
+		summarizeBy: none
+		sourceColumn: phase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column phase_name
+		dataType: string
+		isHidden
+		lineageTag: 7d9ef690-76eb-432c-a0d3-a0925c65b72c
+		summarizeBy: none
+		sourceColumn: phase_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column brent_close
+		dataType: double
+		lineageTag: adeef40c-b39c-4702-8a9f-fe7795f3ebce
+		summarizeBy: none
+		sourceColumn: brent_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wti_close
+		dataType: double
+		lineageTag: c0bccf27-0db5-4e79-a78b-ce1a5f623ab7
+		summarizeBy: none
+		sourceColumn: wti_close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_level
+		dataType: double
+		isHidden
+		lineageTag: b9565452-09ef-410f-88c4-e7bd4cb1ea2f
+		summarizeBy: none
+		sourceColumn: nifty_level
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column nifty_return
+		dataType: double
+		isHidden
+		lineageTag: dfdedf59-c690-45ed-b557-efbcece7e455
+		summarizeBy: none
+		sourceColumn: nifty_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sensex_level
+		dataType: double
+		isHidden
+		lineageTag: 51863cad-83d5-460f-8770-7386da316af7
+		summarizeBy: none
+		sourceColumn: sensex_level
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sensex_return
+		dataType: double
+		lineageTag: 381c4a40-2989-4b59-a391-fed000e83da0
+		summarizeBy: none
+		sourceColumn: sensex_return
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fii_net_flow
+		dataType: double
+		lineageTag: 628dd096-2a01-4156-a245-40680de04053
+		summarizeBy: sum
+		sourceColumn: fii_net_flow
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column usd_inr
+		dataType: double
+		isHidden
+		lineageTag: 0ba9d7d2-0e88-4024-b87e-def18fdd1c57
+		summarizeBy: none
+		sourceColumn: usd_inr
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column event_severity
+		dataType: int64
+		formatString: 0
+		lineageTag: 83d1fbbb-0260-4188-ba9b-ac3ff5f26629
+		summarizeBy: none
+		sourceColumn: event_severity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'war_shock_lab daily_panel' = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("localhost:3306", "war_shock_lab", [ReturnSingleDatabase=true]),
+				    war_shock_lab_daily_panel = Source{[Schema="war_shock_lab",Item="daily_panel"]}[Data]
+				in
+				    war_shock_lab_daily_panel
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "738fcdb3c8f1b89fe0ef",
+  "position": {
+    "x": 32,
+    "y": 744,
+    "z": 230,
+    "height": 304,
+    "width": 1856,
+    "tabOrder": 230
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "horizontalTextAlignment": "left",
+                "textRuns": [
+                  {
+                    "value": "Method and limits. Coefficients come from an OLS regression of daily Nifty returns on daily Brent returns, daily USD/INR change, daily FII flow and an event-severity dummy (notebooks/03_oil_flows_returns_regression.ipynb, n=115 trading days, R2=0.176). Only two drivers were significant: Brent return -0.0774 (p=0.001) and USD/INR change -0.4228 (p=0.018). Those two drive this grid. FII flow (p=0.424) and the severity dummy (p=0.353) were not significant and are deliberately excluded. There is no projected FII band or CAD impact here because neither has a supporting model. The lab is NOT keyed on Hormuz lost-bpd: that relationship was tested across six specifications (levels, first differences, lagged, and forward 5-day) and was null in every one, with correlations of -0.09 and 0.02; lost-bpd is an analyst intensity estimate tied to the 0-4 status ladder rather than a measured quantity. This is an explanatory model on historical data, not a predictive one.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "fontWeight": "normal",
+                      "color": "#1A1A1A",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
